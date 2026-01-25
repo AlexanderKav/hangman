@@ -11,14 +11,8 @@ random_word =  file_reader.pick_random_word
 
 puts random_word
 
+guess = Guess.new(random_word)
 
-guess_length = random_word.length-1
+guess.show_progress
 
-guesses = []
-
-guess_length.times do
-  guesses.push"_"
-end
-
-puts guesses.join(" ")
-#puts "Welcome to Hangman"
+guess.attempt
