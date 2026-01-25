@@ -1,25 +1,24 @@
-#require "lib/"
-#require 'json'
+require_relative 'lib/guess'
+require_relative 'lib/file_reader'
 
-#File.open("google-10000-english-no-swears.txt", 'r') do |file|
+lines = File.readlines("words.txt")
+file_reader = FileReader.new(lines)
 
-  #puts file.read()
-#end
-lines = File.readlines("google-10000-english-no-swears.txt")
-#json = JSON.generate(lines)
-words = []
-for line in lines do
-  words.push(line)
-end
-#puts json
+file_reader.read_file
 
-random_word = words.sample()
+
+random_word =  file_reader.pick_random_word
 
 puts random_word
 
+
 guess_length = random_word.length-1
 
+guesses = []
+
 guess_length.times do
-puts "_"
+  guesses.push"_"
 end
+
+puts guesses.join(" ")
 #puts "Welcome to Hangman"
