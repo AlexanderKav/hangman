@@ -14,10 +14,11 @@ puts random_word
 guess = Guess.new(random_word)
 
 while guess.game_over? == false
-  puts "========================="
-
-  guess.show_progress
   puts "\n"
-  guess.attempt
   puts "========================="
+  guess.attempt
+  puts "\n"
+  guess.show_progress
+  puts "========================="
+  puts "\n"
 end

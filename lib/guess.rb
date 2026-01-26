@@ -37,6 +37,7 @@ class Guess
 
   def show_progress
     puts @correct_guesses.join(" ")
+    puts "\n"
     puts "Incorrect guess so far: #{@guesses.join(", ")}"
   end
 
