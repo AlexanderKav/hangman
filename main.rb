@@ -13,6 +13,11 @@ puts random_word
 
 guess = Guess.new(random_word)
 
-guess.show_progress
+while guess.game_over? == false
+  puts "========================="
 
-guess.attempt
+  guess.show_progress
+  puts "\n"
+  guess.attempt
+  puts "========================="
+end
