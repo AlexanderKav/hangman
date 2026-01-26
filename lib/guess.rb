@@ -1,3 +1,4 @@
+require 'json'
 class Guess
   @@guess_attempts = 12
   def initialize(word)
@@ -25,6 +26,12 @@ class Guess
     puts "Please choose a letter: "
     letter_guess = gets.chomp
     letter_guess = letter_guess.downcase
+    while  @guesses.include?(letter_guess)
+      puts "You have already guessed #{letter_guess}"
+      puts "Please choose a letter: "
+      letter_guess = gets.chomp
+      letter_guess = letter_guess.downcase
+    end
     if is_guess_in_word?(letter_guess)
       puts "Correct !!!"
     else
@@ -63,10 +70,37 @@ class Guess
     game_over
   end
 
-
-  def incorrect_letter
-    
+  def to_json(*a)
+  {
+    :guesses_left => @@guess_attempts,
+    :correct_guesses => @correct_guesses,
+    :word => @word,
+    :incorrect_guesses => @incorrect_guesses
+  }.to_json(*a)
   end
+
+  def self.json_create(o)
+    new(o["guesses_left"])
+  end
+
+  #def to_json
+    
+  #  JSON.dump({
+   #   :guesses_left => @@guess_attempts,
+    #  :correct_guesses => @correct_guesses,
+     # :word => @word,
+      #:incorrect_guesses => @incorrect_guesses,
+      
+    #})
+  #end
+
+  #def self.from_json(string)
+   # data = JSON.load string
+    #self.new(data['guesses_left'],
+    #data['correct_guesses'],
+    ##data['word'],
+    #data['incorrect_guesses'])
+  #end
 
 
 end

@@ -21,4 +21,13 @@ while guess.game_over? == false
   guess.show_progress
   puts "========================="
   puts "\n"
+
+  puts "Would you like to save your progress? (Y/N): "
+  save = gets.chomp
+  if save.downcase == "y"
+    guess_string = guess.to_json
+    File.write("saved_attempts", guess_string)
+
+    break
+  end
 end
