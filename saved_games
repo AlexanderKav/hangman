@@ -1,58 +1,29 @@
 [
   {
-    "save_file_number": 1,
     "save_file_info": {
       "guesses_left": 12,
       "correct_guesses": [
-        "b",
-        "_",
-        "_",
-        "_",
-        "_",
+        "l",
         "_",
         "_",
         "_",
         "_"
       ],
-      "word": "batteries",
+      "word": "looks",
       "incorrect_guesses": [
 
       ]
     }
   },
   {
-    "save_file_number": 1,
     "save_file_info": {
       "guesses_left": 12,
       "correct_guesses": [
-        "o",
-        "_",
-        "_",
+        "s",
         "_",
         "_"
       ],
-      "word": "owner",
-      "incorrect_guesses": [
-
-      ]
-    }
-  },
-  {
-    "save_file_number": 1,
-    "save_file_info": {
-      "guesses_left": 12,
-      "correct_guesses": [
-        "w",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_",
-        "_"
-      ],
-      "word": "workforce",
+      "word": "ser",
       "incorrect_guesses": [
 
       ]

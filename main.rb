@@ -9,10 +9,13 @@ if File.exist?("saved_games")
   if load_previous_saves.downcase == 'y'
       json_text = File.read("saved_games")
       data = JSON.parse(json_text)
+      index =1
       data.each do |item|
-        puts item["save_file_number"]
+        puts "save file ##{index}"
+        p item["save_file_info"]["correct_guesses"].join(" ")
+        puts "Attempts left: #{item["save_file_info"]["guesses_left"]}"
+        index+=1
       end
-      #puts data["save_file_number"]
   end
 end
 
