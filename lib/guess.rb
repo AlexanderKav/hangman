@@ -72,11 +72,27 @@ class Guess
 
   def to_json(*a)
   {
+    :save_file_number => 1,
+    :save_file_info =>{
     :guesses_left => @@guess_attempts,
     :correct_guesses => @correct_guesses,
     :word => @word,
-    :incorrect_guesses => @incorrect_guesses
+    :incorrect_guesses => @guesses
+  }
   }.to_json(*a)
+  end
+
+
+  def to_object()
+    {
+      :save_file_number => 1,
+      :save_file_info =>{
+      :guesses_left => @@guess_attempts,
+      :correct_guesses => @correct_guesses,
+      :word => @word,
+      :incorrect_guesses => @guesses
+    }
+    }
   end
 
   def self.json_create(o)
