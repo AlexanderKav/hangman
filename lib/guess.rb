@@ -1,14 +1,16 @@
 require 'json'
 class Guess
-  @@guess_attempts = 12
-  def initialize(word)
-    @word = word.chomp
-    @length_of_word = word.length-1
-    @correct_guesses = []
-    @guesses = []
-    blank_slate
-  end
 
+  def initialize(word, guess_attempts = 10,  correct_guesses = [], guesses = [])
+    @word = word
+    @guess_attempts = guess_attempts
+    @correct_guesses = correct_guesses
+    @guesses = guesses
+    @length_of_word = word.length
+    if @correct_guesses.length < 1 && @guesses.length < 1
+      blank_slate
+    end
+  end
 
   def is_guess_in_word?(letter)
     guess = false
@@ -20,7 +22,6 @@ class Guess
     end
     guess
   end
-
 
   def attempt
     puts "Please choose a letter: "
@@ -35,34 +36,29 @@ class Guess
     if is_guess_in_word?(letter_guess)
       puts "Correct !!!"
     else
-      @@guess_attempts -=1
+      @guess_attempts -=1
       @guesses.push(letter_guess)
-      puts "Incorrect !!! You have #{@@guess_attempts} left"
+      puts "Incorrect !!! You have #{@guess_attempts} lives left"
     end
   end
-
 
   def show_progress
     puts @correct_guesses.join(" ")
     puts "\n"
     puts "Incorrect guess so far: #{@guesses.join(", ")}"
   end
-
-
-
   
   def blank_slate
-    @length_of_word.times do
-      @correct_guesses.push"_"
-    end
+      @length_of_word.times do
+        @correct_guesses.push("_")
+      end
   end
 
   def game_over?
     game_over = false
-    if @@guess_attempts == 0
+    if @guess_attempts == 0
       game_over = true
       puts "You lose!!!"
-    
     elsif @word == @correct_guesses.join("")
       game_over = true
       puts "You Win!!!"
@@ -70,52 +66,12 @@ class Guess
     game_over
   end
 
-  def to_json(*a)
-  {
-    :save_file_info =>{
-    :guesses_left => @@guess_attempts,
-    :correct_guesses => @correct_guesses,
-    :word => @word,
-    :incorrect_guesses => @guesses
-  }
-  }.to_json(*a)
-  end
-
-
   def to_object()
     {
-
-      :save_file_info =>{
-      :guesses_left => @@guess_attempts,
+      :guesses_left => @guess_attempts,
       :correct_guesses => @correct_guesses,
       :word => @word,
       :incorrect_guesses => @guesses
     }
-    }
   end
-
-  def self.json_create(o)
-    new(o["guesses_left"])
-  end
-
-  #def to_json
-    
-  #  JSON.dump({
-   #   :guesses_left => @@guess_attempts,
-    #  :correct_guesses => @correct_guesses,
-     # :word => @word,
-      #:incorrect_guesses => @incorrect_guesses,
-      
-    #})
-  #end
-
-  #def self.from_json(string)
-   # data = JSON.load string
-    #self.new(data['guesses_left'],
-    #data['correct_guesses'],
-    ##data['word'],
-    #data['incorrect_guesses'])
-  #end
-
-
 end
