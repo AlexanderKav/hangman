@@ -76,7 +76,7 @@ loop do
         end
       end
 
-    if updated == true
+    if updated == false
       array.push(guess_string)
     end
 
