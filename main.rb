@@ -57,15 +57,29 @@ loop do
   puts "Would you like to save your progress? (Y/N): "
   save = gets.chomp
   if save.downcase == "y"
-    guess_string = guess.to_object
+    guess_string = guess.to_object.transform_keys(&:to_s)
+    #guess_string = guess.to_object
     path = "saved_games"
-    array = 
-    if File.exist?(path) && File.size?(path)
-      JSON.parse(File.read(path))
-    else
-      []
+    array = if File.exist?(path) && File.size?(path)
+              JSON.parse(File.read(path))
+            else
+                []
+            end
+    updated = false
+    array.each do|item|
+        if item["word"].to_s.strip.downcase == guess_string["word"].to_s.strip.downcase
+            item["guesses_left"] = guess_string["guesses_left"]
+            item["correct_guesses"] = guess_string["correct_guesses"]
+            item["incorrect_guesses"] = guess_string["incorrect_guesses"]
+            updated = true
+            break
+        end
+      end
+
+    if updated == true
+      array.push(guess_string)
     end
-    array.push(guess_string)
+
     File.write(path,JSON.pretty_generate(array))
     break
   end
